@@ -49,7 +49,7 @@
    :client-secret "5840135966506047574"
    :callback {
                :domain "https://rocky-river-7942.herokuapp.com/"
-               :path "/salesforce.callback" }})
+               :path "/callback.html" }})
 
 (def uri-config
   {:authentication-uri {:url "https://login.salesforce.com/services/oauth2/authorize"
