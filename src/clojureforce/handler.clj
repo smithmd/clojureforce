@@ -48,8 +48,8 @@
   {:client-id "3MVG9Km_cBLhsuPy_yi8OscDmCRcTnQRCLS_sSLrhur.23PmBXSU0KsW8H9_n6NU0OECokNTe1StOsZhcA4Cp"
    :client-secret "5840135966506047574"
    :callback {
-               :domain "https://rocky-river-7942.herokuapp.com/"
-               :path "/callback.html" }})
+               :domain "https://rocky-river-7942.herokuapp.com"
+               :path "/salesforce.callback" }})
 
 (def uri-config
   {:authentication-uri {:url "https://login.salesforce.com/services/oauth2/authorize"
