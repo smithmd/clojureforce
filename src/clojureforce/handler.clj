@@ -1,6 +1,7 @@
 (ns clojureforce.handler
   (:require [compojure.core :refer [defroutes]]
             [clojureforce.routes.home :refer [home-routes]]
+            [clojureforce.routes.salesforce :refer [salesforce-routes]]
             [clojureforce.middleware :refer [load-middleware]]
             [noir.response :refer [redirect]]
             [noir.util.middleware :refer [app-handler]]
@@ -71,7 +72,7 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [home-routes app-routes]
+           [home-routes app-routes salesforce-routes]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes
