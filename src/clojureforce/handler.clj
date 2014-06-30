@@ -14,7 +14,7 @@
             [friend-oauth2.util :refer [format-config-uri get-access-token-from-params]]
             [cheshire.core :as j]
             (cemerick.friend [workflows :as workflows]
-                             [credenials :as creds])))
+                             [credentials :as creds])))
 
 (defroutes app-routes
   (route/resources "/")

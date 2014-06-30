@@ -6,7 +6,7 @@
             [friend-oauth2.workflow :as oauth2]
             [friend-oauth2.util :refer [format-config-uri get-access-token-from-params]]
             (cemerick.friend [workflows :as workflows]
-                             [credenials :as creds])))
+                             [credentials :as creds])))
 
 (defn home-page []
   (layout/render
@@ -14,8 +14,6 @@
 
 (defn about-page []
   (layout/render "about.html"))
-
-(defn )
 
 (defn reports-page
   "Shows a list of available reports in salesforce"
