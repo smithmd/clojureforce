@@ -50,7 +50,7 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [home-routes salesforce-routes app-routes ]
+           [home-routes salesforce-routes app-routes]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes
