@@ -8,7 +8,13 @@
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [cemerick.friend :as friend]
+            [friend-oauth2.workflow :as oauth2]
+            [friend-oauth2.util :refer [format-config-uri get-access-token-from-params]]
+            [cheshire.core :as j]
+            (cemerick.friend [workflows :as workflows]
+                             [credenials :as creds])))
 
 (defroutes app-routes
   (route/resources "/")
@@ -42,6 +48,26 @@
   (timbre/info "clojureforce is shutting down..."))
 
 
+(def client-config
+  {:client-id "3MVG9Km_cBLhsuPy_yi8OscDmCRcTnQRCLS_sSLrhur.23PmBXSU0KsW8H9_n6NU0OECokNTe1StOsZhcA4Cp"
+   :client-secret "5840135966506047574"
+   :callback {
+     :domain "https://rocky-river-7942.herokuapp.com/"
+     :path "/callback" }})
+
+(def uri-config
+  {:authentication-uri {:url "https://login.salesforce.com/services/oauth2/authorize"
+                        :query {:client_id (:client-id client-config)
+                                :response_type "code"
+                                :redirect_uri (format-config-uri client-config)
+                                :scope "user"}}
+
+   :access-token-uri {:url "https://login.salesforce.com/services/oauth2/token"
+                      :query {:client_id (:client-id client-config)
+                              :client_secret (:client-secret client-config)
+                              :grant_type "authorization code"
+                              :redirect_uri (format-config-uri client-config)}}
+  })
 
 (def app (app-handler
            ;; add your application routes here

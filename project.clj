@@ -9,7 +9,10 @@
                  [com.taoensso/tower "2.0.2"]
                  [markdown-clj "0.9.44"]
                  [environ "0.5.0"]
-                 [noir-exception "0.2.2"]]
+                 [noir-exception "0.2.2"]
+                 [com.cemerick/friend "0.2.0"]
+                 [friend-oauth2 "0.1.1"]
+                 [cheshire "5.3.1"]]
 
   :repl-options {:init-ns clojureforce.repl}
   :plugins [[lein-ring "0.8.10"]
