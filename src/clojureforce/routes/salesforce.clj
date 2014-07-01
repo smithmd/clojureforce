@@ -8,13 +8,13 @@
             (cemerick.friend [workflows :as workflows]
                              [credentials :as creds])
             [cheshire.core :as j]
-            [clj-http.client :as client]))
-
+            [clj-http.client :as client]
+            [clojureforce.handler :as cfhandler]))
 
 (defn get-salesforce-reports
   "Call for authenticated salesforce user's reports"
   [access-token]
-  (let [url "https://na3.salesforce.com//services/data/v31.0/chatter/feeds/news/me/feed-elements"
+  (let [url "https://na3.salesforce.com/services/data/v31.0/analytics/dashboards"
         response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token) }})
         reports (j/parse-string (:body response) true)]
     reports))
@@ -28,5 +28,5 @@
     (str (vec (map :name reports-response)))))
 
 (defroutes salesforce-routes
-  (GET "/get-reports" request (friend/authorize #{::user} (reports-page request)))
+  (GET "/get-reports" request (friend/authorize #{::api} (reports-page request)))
   (friend/logout (ANY "/logout" request (ring.util.response/redirect "/"))))

@@ -42,7 +42,7 @@
   (if (env :dev) (parser/cache-off!))
   (timbre/info "clojureforce started successfully"))
 
-(def config-auth {:roles #{::user}})
+(def config-auth {:roles #{::api ::full ::chatter_api}})
 
 (def client-config
   {:client-id "3MVG9Km_cBLhsuPy_yi8OscDmCRcTnQRCLS_sSLrhur.23PmBXSU0KsW8H9_n6NU0OECokNTe1StOsZhcA4Cp"
