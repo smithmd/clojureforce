@@ -77,6 +77,7 @@
            [home-routes
             (friend/authenticate salesforce-routes
               {:allow-anon? true
+               :login-uri "/salesforce.callback"
                :workflows [(oauth2/workflow
                              {:client-config client-config
                               :uri-config uri-config
