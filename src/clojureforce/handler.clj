@@ -22,8 +22,10 @@
             [hiccup.element :as e]
             ))
 
+(defroutes resource-routes
+  (route/resources "/"))
+
 (defroutes app-routes
-  (route/resources "/")
   (route/not-found "Not Found"))
 
 (defn init
@@ -60,13 +62,13 @@
    :callback {:domain "https://rocky-river-7942.herokuapp.com" :path "/salesforce.callback"}})
 
 (def uri-config
-  {:authentication-uri {:url "https://github.com/login/oauth/authorize"
+  {:authentication-uri {:url "https://login.salesforce.com/services/oauth2/authorize"
                         :query {:client_id (:client-id client-config)
                                 :response_type "code"
                                 :redirect_uri (format-config-uri client-config)
                                 :scope ""}}
 
-   :access-token-uri {:url "https://github.com/login/oauth/access_token"
+   :access-token-uri {:url "https://login.salesforce.com/services/oauth2/token"
                       :query {:client_id (:client-id client-config)
                               :client_secret (:client-secret client-config)
                               :grant_type "authorization_code"
@@ -75,7 +77,8 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [home-routes app-routes
+           [home-routes
+            resource-routes
             (friend/authenticate salesforce-routes
               {:allow-anon? true
                :default-landing-uri "/"
@@ -88,7 +91,8 @@
                               :uri-config uri-config
                               :config-auth {:roles #{::user}}
                               :access-token-parsefn #(-> % :body codec/form-decode (get "access_token"))})]
-               })]
+               })
+            app-routes]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes
