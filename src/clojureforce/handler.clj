@@ -42,7 +42,7 @@
   (if (env :dev) (parser/cache-off!))
   (timbre/info "clojureforce started successfully"))
 
-(def config-auth {:roles #{::api ::full ::chatter_api}})
+(def config-auth {:roles #{::user}})
 
 (def client-config
   {:client-id "3MVG9Km_cBLhsuPy_yi8OscDmCRcTnQRCLS_sSLrhur.23PmBXSU0KsW8H9_n6NU0OECokNTe1StOsZhcA4Cp"
@@ -56,7 +56,7 @@
                         :query {:client_id (:client-id client-config)
                                 :response_type "code"
                                 :redirect_uri (format-config-uri client-config)
-                                :scope "user"}}
+                                :scope "api"}}
 
    :access-token-uri {:url "https://login.salesforce.com/services/oauth2/token"
                       :query {:client_id (:client-id client-config)

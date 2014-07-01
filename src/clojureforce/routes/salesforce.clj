@@ -27,5 +27,5 @@
     (str (vec (map :name reports-response)))))
 
 (defroutes salesforce-routes
-  (GET "/get-reports" request (friend/authorize #{::api} (reports-page request)))
+  (GET "/get-reports" request (friend/authorize #{::user} (reports-page request)))
   (friend/logout (ANY "/logout" request (ring.util.response/redirect "/"))))
