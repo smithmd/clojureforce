@@ -1,6 +1,8 @@
 (ns clojureforce.handler
   (:require [compojure.core :refer [defroutes]]
             [clojureforce.routes.home :refer [home-routes]]
+            [clojureforce.routes.salesforce :refer [salesforce-routes]]
+            [clojureforce.util :as util]
             [clojureforce.middleware :refer [load-middleware]]
             [noir.response :refer [redirect]]
             [noir.util.middleware :refer [app-handler]]
@@ -9,6 +11,15 @@
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
             [environ.core :refer [env]]
+            [cemerick.friend :as friend]
+            (cemerick.friend [workflows :as workflows]
+                             [credentials :as creds])
+            [friend-oauth2.workflow :as oauth2]
+            [friend-oauth2.util :refer [format-config-uri get-access-token-from-params]]
+            [ring.util.response :as resp]
+            [ring.util.codec :as codec]
+            [hiccup.page :as h]
+            [hiccup.element :as e]
             ))
 
 (defroutes app-routes
@@ -42,9 +53,42 @@
   []
   (timbre/info "clojureforce is shutting down..."))
 
+(def client-config
+  {:client-id "3MVG9Km_cBLhsuPy_yi8OscDmCRcTnQRCLS_sSLrhur.23PmBXSU0KsW8H9_n6NU0OECokNTe1StOsZhcA4Cp"
+   :client-secret "5840135966506047574"
+   ;; TODO get friend-oauth2 to support :context, :path-info
+   :callback {:domain "https://rocky-river-7942.herokuapp.com" :path "/salesforce.callback"}})
+
+(def uri-config
+  {:authentication-uri {:url "https://github.com/login/oauth/authorize"
+                        :query {:client_id (:client-id client-config)
+                                :response_type "code"
+                                :redirect_uri (format-config-uri client-config)
+                                :scope ""}}
+
+   :access-token-uri {:url "https://github.com/login/oauth/access_token"
+                      :query {:client_id (:client-id client-config)
+                              :client_secret (:client-secret client-config)
+                              :grant_type "authorization_code"
+                              :redirect_uri (format-config-uri client-config)
+                              :code ""}}})
+
 (def app (app-handler
            ;; add your application routes here
-           [home-routes app-routes]
+           [home-routes app-routes
+            (friend/authenticate salesforce-routes
+              {:allow-anon? true
+               :default-landing-uri "/"
+               :login-uri "/salesforce.callback"
+               :unauthorized-handler #(-> (h/html5 [:h2 "You do not have sufficient privileges to access " (:uri %)])
+                                        resp/response
+                                        (resp/status 401))
+               :workflows [(oauth2/workflow
+                             {:client-config client-config
+                              :uri-config uri-config
+                              :config-auth {:roles #{::user}}
+                              :access-token-parsefn #(-> % :body codec/form-decode (get "access_token"))})]
+               })]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes
