@@ -8,8 +8,7 @@
             (cemerick.friend [workflows :as workflows]
                              [credentials :as creds])
             [cheshire.core :as j]
-            [clj-http.client :as client]
-            [clojureforce.handler :as cfhandler]))
+            [clj-http.client :as client]))
 
 (defn get-salesforce-reports
   "Call for authenticated salesforce user's reports"
