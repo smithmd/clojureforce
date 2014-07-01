@@ -66,20 +66,18 @@
                         :query {:client_id (:client-id client-config)
                                 :response_type "code"
                                 :redirect_uri (format-config-uri client-config)
-                                :scope ""}}
+                                :scope "api"}}
 
    :access-token-uri {:url "https://login.salesforce.com/services/oauth2/token"
                       :query {:client_id (:client-id client-config)
                               :client_secret (:client-secret client-config)
                               :grant_type "authorization_code"
                               :redirect_uri (format-config-uri client-config)
-                              :code ""}}})
+                              }}})
 
 (def app (app-handler
            ;; add your application routes here
-           [home-routes
-            resource-routes
-            (friend/authenticate salesforce-routes
+           [(friend/authenticate salesforce-routes
               {:allow-anon? true
                :default-landing-uri "/"
                :login-uri "/salesforce.callback"
@@ -92,7 +90,7 @@
                               :config-auth {:roles #{::user}}
                               :access-token-parsefn #(-> % :body codec/form-decode (get "access_token"))})]
                })
-            app-routes]
+            ]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes
