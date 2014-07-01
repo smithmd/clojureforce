@@ -10,7 +10,7 @@
                  [markdown-clj "0.9.44"]
                  [environ "0.5.0"]
                  [noir-exception "0.2.2"]
-                 [com.cemerick/friend "0.2.0"]
+                 [com.cemerick/friend "0.2.1"]
                  [friend-oauth2 "0.1.1"]
                  [cheshire "5.3.1"]
                  [org.clojure/core.cache "0.6.3"]
