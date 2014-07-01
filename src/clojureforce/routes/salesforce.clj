@@ -27,4 +27,4 @@
 
 (defroutes salesforce-routes
   (GET "/get-reports" request (friend/authorize #{::user} (reports-page request)))
-  (friend/logout (ANY "/logout" request (ring.util.response/redirect "/"))))s
+  (friend/logout (ANY "/logout" request (ring.util.response/redirect "/"))))
