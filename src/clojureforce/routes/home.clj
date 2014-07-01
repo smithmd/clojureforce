@@ -10,9 +10,9 @@
 (defn about-page []
   (layout/render "about.html"))
 
-(defn status-page [request]
-  (let [count (:count (:session request) 0)
-        session (assoc (:session request) :count (inc count))]
+(defn status-page []
+  (let [count (:count (:session ) 0)
+        session (assoc (:session ) :count (inc count))]
     (-> (ring.util.response/response
           (str "<p>We've hit the session page " (:count session)
             " times.</p><p>The current session: " session "</p>"))
@@ -21,5 +21,5 @@
 (defroutes home-routes
   (GET "/" [] (home-page))
   (GET "/about" [] (about-page))
-  (GET "/status" request (status-page)))
+  (GET "/status" [] (status-page)))
 
