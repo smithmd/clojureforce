@@ -61,7 +61,7 @@
    :access-token-uri {:url "https://login.salesforce.com/services/oauth2/token"
                       :query {:client_id (:client-id client-config)
                               :client_secret (:client-secret client-config)
-                              :grant_type "authorization code"
+                              :grant_type "authorization_code"
                               :redirect_uri (format-config-uri client-config)}}})
 
 
