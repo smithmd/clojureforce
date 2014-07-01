@@ -83,7 +83,6 @@
                               :uri-config uri-config
                               :access-token-parsefn get-access-token-from-params
                               :config-auth config-auth})]})
-
             app-routes]
            ;; add custom middleware here
            :middleware (load-middleware)
@@ -95,4 +94,4 @@
            ;; serialize/deserialize the following data formats
            ;; available formats:
            ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
-           :formats [:json-kw :edn]))
+           :formats [:json :json-kw :edn]))

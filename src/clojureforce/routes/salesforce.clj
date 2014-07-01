@@ -14,9 +14,8 @@
   "Call for authenticated salesforce user's reports"
   [access-token]
   (let [url "https://na3.salesforce.com/services/data/v31.0/analytics/dashboards"
-        response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token) }})
-        reports (j/parse-string (:body response) true)]
-    reports))
+        response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token) }})]
+    response :body))
 
 (defn reports-page
   "Shows a list of available reports in salesforce"
@@ -24,8 +23,8 @@
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
         access-token (:access_token (second (first authentications)))
         reports-response (get-salesforce-reports access-token)]
-    (str (vec (map :name reports-response)))))
+    (layout/render "home.html" {:content reports-response})))
 
 (defroutes salesforce-routes
   (GET "/get-reports" request (friend/authorize #{::user} (reports-page request)))
-  (friend/logout (ANY "/logout" request (ring.util.response/redirect "/"))))
+  (friend/logout (ANY "/logout" request (ring.util.response/redirect "/"))))s
