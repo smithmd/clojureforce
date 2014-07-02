@@ -56,8 +56,8 @@
 
 ;; Routes
 (defroutes salesforce-routes
-  (GET "/list-reports" request
+  (GET "/reports" request
     (friend/authenticated (reports-page request)))
-  (GET "/report-data/:id" [id :as request]
+  (GET "/reports/:id" [id :as request]
     (friend/authenticated (salesforce-report-page request id)))
   )
