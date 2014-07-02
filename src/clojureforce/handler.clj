@@ -79,6 +79,7 @@
            ;; add your application routes here
            [home-routes
             resource-routes
+            app-routes
             (friend/authenticate salesforce-routes
               {:allow-anon? true
                :default-landing-uri "/"
@@ -91,8 +92,7 @@
                               :uri-config uri-config
                               :config-auth {:roles #{::user}}
                               :access-token-parsefn #(-> % :body codec/form-decode (get "access_token"))})]
-               })
-            app-routes]
+               })]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes
