@@ -21,6 +21,6 @@
 (defroutes home-routes
   (GET "/" [] (home-page))
   (GET "/about" [] (about-page))
-  (GET "/status" request (status-page request))
   (GET "/status/:number" [number :as request] (str "<p>Number: " number "</p>" (status-page request))))
+  (GET "/status" request (status-page request))
 
