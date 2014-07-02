@@ -11,6 +11,8 @@
 
 (declare get-salesforce-reports-list)
 (declare reports-page)
+(declare get-salesforce-report-data)
+(declare get-salesforce-report)
 
 (defn reports-page
   "Shows a list of available reports in salesforce"
