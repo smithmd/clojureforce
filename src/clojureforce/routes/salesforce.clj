@@ -16,7 +16,7 @@
   "Shows a list of available reports in salesforce"
   [request]
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
-        access-token (first authentications)
+        access-token (first (first authentications))
         reports-response (get-salesforce-reports access-token)
         ]
     (str (vec (map :name reports-response)))
