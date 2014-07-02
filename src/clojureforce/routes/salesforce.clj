@@ -9,55 +9,40 @@
               [credentials :as creds])
             [friend-oauth2.workflow :as oauth2]))
 ;; pages
-(declare reports-page)
-(declare salesforce-report-page)
+(declare salesforce-route-authentication)
 ;; data functions
-(declare get-salesforce-reports-list)
-(declare get-salesforce-report-data)
+(declare get-salesforce-api-data)
 
 
 ;; Page routes
-(defn reports-page
-  "Shows a list of available reports in salesforce"
-  [request]
-  (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
-        access-token (first (first authentications))
-        reports-response (get-salesforce-reports-list access-token)
-        ]
-    reports-response
-    ))
-
-(defn salesforce-report-page
+(defn salesforce-route-authentication
   "Return a report for a js library to display"
-  [report-id request]
+  [request url]
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
         access-token (first (first authentications))
-        data-response (get-salesforce-report-data report-id access-token)]
+        data-response (get-salesforce-api-data url access-token)]
     data-response))
 
-
 ;; Data for the pages
-(defn get-salesforce-reports-list
-  "Call for authenticated salesforce user's reports"
-  [access-token]
-  (let [url "https://na3.salesforce.com/services/data/v30.0/analytics/reports"
-        response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
-        reports (json/parse-string (:body response) true)]
-    reports))
-
-(defn get-salesforce-report-data
-  "Get the data from a single report"
-  [report-id access-token]
-  (let [url (str "https://na3.salesforce.com/services/data/v30.0/analytics/reports/" report-id)
-        response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
-        report-data (json/parse-string (:body response) true)]
-    report-data))
-
+(defn get-salesforce-api-data
+  "Get the data from a single report instance"
+  [url access-token]
+  (let [response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
+        data (json/parse-string (:body response) true)]
+    data))
 
 ;; Routes
 (defroutes salesforce-routes
+  (GET "/reports/:report-id/instances/:instance-id" [report-id instance-id :as request]
+    (friend/authenticated (salesforce-route-authentication request
+                            (str "https://na3.salesforce.com/services/data/v30.0/analytics/reports/" report-id "/instances/" instance-id "?includeDetails=true"))))
+  (GET "/reports/:id/instances" [id :as request]
+    (friend/authenticated (salesforce-route-authentication request
+                            (str"https://na3.salesforce.com/services/data/v30.0/analytics/reports/" id "/instances?includeDetails=true"))))
   (GET "/reports/:id" [id :as request]
-    (friend/authenticated (salesforce-report-page id request)))
+    (friend/authenticated (salesforce-route-authentication request
+                            (str "https://na3.salesforce.com/services/data/v30.0/analytics/reports/" id))))
   (GET "/reports" request
-    (friend/authenticated (reports-page request)))
+    (friend/authenticated (salesforce-route-authentication request
+                            "https://na3.salesforce.com/services/data/v30.0/analytics/reports")))
   )
