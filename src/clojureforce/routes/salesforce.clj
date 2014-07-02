@@ -15,7 +15,7 @@
 (defn reports-page
   "Shows a list of available reports in salesforce"
   [request]
-  (let [authentications (get-in request [:session :cemerick.friend/identity :authentications :params])]
+  (let [authentications (get-in request [:params])]
     (str (vec authentications))))
 
 
