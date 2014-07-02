@@ -82,9 +82,6 @@
               {:allow-anon? true
                :default-landing-uri "/"
                :login-uri "/salesforce.callback"
-               :unauthorized-handler #(-> (h/html5 [:h2 "You do not have sufficient privileges to access " (:uri %)])
-                                        resp/response
-                                        (resp/status 401))
                :workflows [(oauth2/workflow
                              {:client-config client-config
                               :uri-config uri-config

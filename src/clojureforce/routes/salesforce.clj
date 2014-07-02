@@ -32,6 +32,6 @@
 
 (defroutes salesforce-routes
   (GET "/list-reports" request
-    (friend/authorize (reports-page request)))
+    (friend/authorize #{::user} (reports-page request)))
   (GET "/role-user" req
     (friend/authorize "You're a user!")))
