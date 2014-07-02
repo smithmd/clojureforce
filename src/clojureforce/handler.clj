@@ -91,7 +91,7 @@
                               :config-auth {:roles #{::user}}
                               :access-token-parsefn #(-> % :body codec/form-decode (get "access_token"))})]
                })
-            ; app-routes
+            app-routes
             ]
            ;; add custom middleware here
            :middleware (load-middleware)

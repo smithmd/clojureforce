@@ -15,8 +15,10 @@
 (defn reports-page
   "Shows a list of available reports in salesforce"
   [request]
-  (let [authentications (get-in request [:params])]
-    (str (vec authentications))))
+  (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
+        access-token (:access_token (second (first authentications)))
+        reports-response (get-salesforce-reports access-token)]
+    (str (vec (map :name reports-response)))))
 
 
 (defn get-salesforce-reports
@@ -30,6 +32,6 @@
 
 (defroutes salesforce-routes
   (GET "/list-reports" request
-    (friend/authorize #{::user} (reports-page request)))
+    (friend/authorize (reports-page request)))
   (GET "/role-user" req
     (friend/authorize "You're a user!")))
