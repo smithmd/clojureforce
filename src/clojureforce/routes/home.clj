@@ -22,5 +22,5 @@
   (GET "/" [] (home-page))
   (GET "/about" [] (about-page))
   (GET "/status" request (status-page request))
-  (GET "/status/:number" [number request] (str "Number: " number (status-page request))))
+  (GET "/status/:number" [number :as request] (str "<p>Number: " number "</p>" (status-page request))))
 
