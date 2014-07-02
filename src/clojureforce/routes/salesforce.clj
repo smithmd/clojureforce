@@ -27,18 +27,20 @@
   "Call for authenticated salesforce user's reports"
   [access-token]
   (let [url "https://na3.salesforce.com/services/data/v31.0/analytics/reports"
-        response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token) }})
+        response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
         reports (json/parse-string (:body response) true)]
     reports))
 
 (defn get-salesforce-report
   "Get the data from a single report"
   [report-id]
-  report-id
+  (str "Report " report-id)
   )
 
 
 (defroutes salesforce-routes
   (GET "/list-reports" request
     (friend/authenticated (reports-page request)))
-  (GET "/report-data/:id" [id]  (str "Report " id) ))
+  (GET "/report-data/:id" [id]
+    (friend/authenticated (get-salesforce-report id)))
+  )
