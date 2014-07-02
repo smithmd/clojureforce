@@ -15,7 +15,7 @@
             (cemerick.friend [workflows :as workflows]
               [credentials :as creds])
             [friend-oauth2.workflow :as oauth2]
-            [friend-oauth2.util :refer [format-config-uri get-access-token-from-params]]
+            [friend-oauth2.util :refer [format-config-uri extract-access-token]]
             [ring.util.response :as resp]
             [ring.util.codec :as codec]
             [hiccup.page :as h]
