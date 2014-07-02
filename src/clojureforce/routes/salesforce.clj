@@ -33,7 +33,7 @@
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
         access-token (first (first authentications))
         data-response (get-salesforce-report-data report-id access-token)]
-    ))
+    data-response))
 
 
 ;; Data for the pages
@@ -51,7 +51,7 @@
   (let [url (str "https://na3.salesforce.com/services/data/v29.0/analytics/reports/" report-id)
         response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
         report-data (json/parse-string (:body response) true)]
-    access-token))
+    report-data))
 
 
 ;; Routes
