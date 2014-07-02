@@ -13,7 +13,7 @@
             [environ.core :refer [env]]
             [cemerick.friend :as friend]
             (cemerick.friend [workflows :as workflows]
-                             [credentials :as creds])
+              [credentials :as creds])
             [friend-oauth2.workflow :as oauth2]
             [friend-oauth2.util :refer [format-config-uri get-access-token-from-params]]
             [ring.util.response :as resp]
@@ -55,6 +55,9 @@
   []
   (timbre/info "clojureforce is shutting down..."))
 
+
+(def config-auth {:roles #{::user}})
+
 (def client-config
   {:client-id "3MVG9Km_cBLhsuPy_yi8OscDmCRcTnQRCLS_sSLrhur.23PmBXSU0KsW8H9_n6NU0OECokNTe1StOsZhcA4Cp"
    :client-secret "5840135966506047574"
@@ -85,8 +88,8 @@
                :workflows [(oauth2/workflow
                              {:client-config client-config
                               :uri-config uri-config
-                              :config-auth {:roles #{::user}}
-                              :access-token-parsefn #(-> % :body codec/form-decode (get "access_token"))})]
+                              :config-auth config-auth
+                              :access-token-parsefn get-access-token-from-params})]
                })
             app-routes
             ]
