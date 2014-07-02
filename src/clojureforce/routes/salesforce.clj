@@ -32,15 +32,24 @@
     reports))
 
 (defn get-salesforce-report
-  "Get the data from a single report"
-  [report-id]
-  (str "Report " report-id)
-  )
+  "Return a report for a js library to display"
+  [request report-id]
+  (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
+        access-token (first (first authentications))
+        data-response (get-salesforce-report-data report-id access-token)]
+  ))
 
+(defn get-salesforce-report-data
+  "Get the data from a single report"
+  [report-id access-token]
+  (let [url (str "https://na3.salesforce.com/services/data/v29.0/analytics/reports/" report-id)
+        response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
+        report-data (json/parse-string (:body response) true)]
+    report-data))
 
 (defroutes salesforce-routes
   (GET "/list-reports" request
     (friend/authenticated (reports-page request)))
-  (GET "/report-data/:id" [id]
-    (friend/authenticated (get-salesforce-report id)))
+  (GET "/report-data/:id" [request id]
+    (friend/authenticated (get-salesforce-report request id)))
   )
