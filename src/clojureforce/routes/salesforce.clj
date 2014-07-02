@@ -41,4 +41,4 @@
 (defroutes salesforce-routes
   (GET "/list-reports" request
     (friend/authenticated (reports-page request)))
-  (GET "/report-data/:report-id" {{report-id "report-id"} :params}  (str "Report " report-id) ))
+  (GET "/report-data/:report-id" {{report "report-id"} :params}  (str "Report " report) ))
