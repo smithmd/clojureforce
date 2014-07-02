@@ -81,7 +81,7 @@
             (friend/authenticate salesforce-routes
               {:allow-anon? true
                :default-landing-uri "/"
-               :login-uri "/salesforce.callback"
+               :login-uri "/salesforce.login"
                :workflows [(oauth2/workflow
                              {:client-config client-config
                               :uri-config uri-config
