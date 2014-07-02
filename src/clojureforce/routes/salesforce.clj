@@ -19,7 +19,7 @@
         access-token (first (first authentications))
         reports-response (get-salesforce-reports access-token)
         ]
-    (str (vec (map :name reports-response)))
+    reports-response
     ))
 
 
@@ -29,7 +29,7 @@
   (let [url "https://na3.salesforce.com/services/data/v29.0/analytics/reports"
         response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token) }})
         reports (json/parse-string (:body response) true)]
-    response))
+    reports))
 
 
 (defroutes salesforce-routes
