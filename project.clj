@@ -13,7 +13,7 @@
                  [cheshire "5.3.1"]
                  [org.clojure/core.cache "0.6.3"]
                  [org.clojure/core.memoize "0.5.6" :exclusions [org.clojure/core.cache]]
-                 [com.cemerick/friend "0.2.1"]
+                 [com.cemerick/friend "0.2.0"]
                  [friend-oauth2 "0.1.1"]
                  [hiccup "1.0.5"]]
 
