@@ -51,7 +51,7 @@
   (let [url (str "https://na3.salesforce.com/services/data/v29.0/analytics/reports/" report-id)
         response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
         report-data (json/parse-string (:body response) true)]
-    report-data))
+    access-token))
 
 
 ;; Routes
