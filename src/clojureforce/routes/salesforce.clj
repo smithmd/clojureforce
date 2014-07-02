@@ -29,7 +29,7 @@
 
 (defn salesforce-report-page
   "Return a report for a js library to display"
-  [request report-id]
+  [report-id request]
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
         access-token (first (first authentications))
         data-response (get-salesforce-report-data report-id access-token)]
@@ -45,7 +45,6 @@
         reports (json/parse-string (:body response) true)]
     reports))
 
-
 (defn get-salesforce-report-data
   "Get the data from a single report"
   [report-id access-token]
@@ -54,10 +53,11 @@
         report-data (json/parse-string (:body response) true)]
     report-data))
 
+
 ;; Routes
 (defroutes salesforce-routes
   (GET "/reports" request
     (friend/authenticated (reports-page request)))
   (GET "/reports/:id" [id :as request]
-    (friend/authenticated (salesforce-report-page request id)))
+    (friend/authenticated (salesforce-report-page id request)))
   )
