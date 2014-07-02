@@ -29,11 +29,9 @@
   (let [url "https://na3.salesforce.com/services/data/v29.0/analytics/reports"
         response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token) }})
         reports (json/parse-string (:body response) true)]
-    reports))
+    (:body response)))
 
 
 (defroutes salesforce-routes
   (GET "/list-reports" request
-    (friend/authenticated (reports-page request)))
-  (GET "/role-user" req
-    (friend/authenticated "You're a user!")))
+    (friend/authenticated (reports-page request))))
