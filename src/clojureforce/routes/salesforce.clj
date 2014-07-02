@@ -33,7 +33,7 @@
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
         access-token (first (first authentications))
         data-response (get-salesforce-report-data report-id access-token)]
-    data-response))
+    access-token))
 
 
 ;; Data for the pages
