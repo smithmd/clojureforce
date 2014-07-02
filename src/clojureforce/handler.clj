@@ -58,7 +58,6 @@
 (def client-config
   {:client-id "3MVG9Km_cBLhsuPy_yi8OscDmCRcTnQRCLS_sSLrhur.23PmBXSU0KsW8H9_n6NU0OECokNTe1StOsZhcA4Cp"
    :client-secret "5840135966506047574"
-   ;; TODO get friend-oauth2 to support :context, :path-info
    :callback {:domain "https://rocky-river-7942.herokuapp.com" :path "/salesforce.callback"}})
 
 (def uri-config
@@ -79,7 +78,6 @@
            ;; add your application routes here
            [home-routes
             resource-routes
-            app-routes
             (friend/authenticate salesforce-routes
               {:allow-anon? true
                :default-landing-uri "/"
@@ -92,7 +90,9 @@
                               :uri-config uri-config
                               :config-auth {:roles #{::user}}
                               :access-token-parsefn #(-> % :body codec/form-decode (get "access_token"))})]
-               })]
+               })
+            ; app-routes
+            ]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes
