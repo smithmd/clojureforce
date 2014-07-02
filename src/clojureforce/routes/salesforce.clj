@@ -40,7 +40,7 @@
 (defn get-salesforce-reports-list
   "Call for authenticated salesforce user's reports"
   [access-token]
-  (let [url "https://na3.salesforce.com/services/data/v29.0/analytics/reports"
+  (let [url "https://na3.salesforce.com/services/data/v30.0/analytics/reports"
         response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
         reports (json/parse-string (:body response) true)]
     reports))
@@ -48,7 +48,7 @@
 (defn get-salesforce-report-data
   "Get the data from a single report"
   [report-id access-token]
-  (let [url (str "https://na3.salesforce.com/services/data/v29.0/analytics/reports/" report-id)
+  (let [url (str "https://na3.salesforce.com/services/data/v30.0/analytics/reports/" report-id)
         response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
         report-data (json/parse-string (:body response) true)]
     report-data))
