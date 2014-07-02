@@ -77,9 +77,12 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [(friend/authenticate salesforce-routes
+           [home-routes
+            resource-routes
+            (friend/authenticate salesforce-routes
               {:allow-anon? true
                :default-landing-uri "/"
+               :login-uri "/salesforce.callback"
                :unauthorized-handler #(-> (h/html5 [:h2 "You do not have sufficient privileges to access " (:uri %)])
                                         resp/response
                                         (resp/status 401))
@@ -89,7 +92,7 @@
                               :config-auth {:roles #{::user}}
                               :access-token-parsefn #(-> % :body codec/form-decode (get "access_token"))})]
                })
-            ]
+            app-routes]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes
