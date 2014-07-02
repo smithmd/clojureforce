@@ -68,7 +68,7 @@
                         :query {:client_id (:client-id client-config)
                                 :response_type "code"
                                 :redirect_uri (format-config-uri client-config)
-                                :scope "api"}}
+                                :scope "full"}}
 
    :access-token-uri {:url "https://login.salesforce.com/services/oauth2/token"
                       :query {:client_id (:client-id client-config)

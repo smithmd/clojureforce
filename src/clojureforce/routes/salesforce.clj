@@ -17,10 +17,9 @@
   [request]
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
         access-token (:access_token (second (first authentications)))
-        ;reports-response (get-salesforce-reports access-token)
+        reports-response (get-salesforce-reports access-token)
         ]
-    ; (str (vec (map :name reports-response)))
-    access-token
+    (str (vec (map :name reports-response)))
     ))
 
 
