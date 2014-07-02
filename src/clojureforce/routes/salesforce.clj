@@ -8,12 +8,15 @@
             (cemerick.friend [workflows :as workflows]
               [credentials :as creds])
             [friend-oauth2.workflow :as oauth2]))
-
-(declare get-salesforce-reports-list)
+;; pages
 (declare reports-page)
+(declare salesforce-report-page)
+;; data functions
+(declare get-salesforce-reports-list)
 (declare get-salesforce-report-data)
-(declare get-salesforce-report)
 
+
+;; Page routes
 (defn reports-page
   "Shows a list of available reports in salesforce"
   [request]
@@ -24,7 +27,16 @@
     reports-response
     ))
 
+(defn salesforce-report-page
+  "Return a report for a js library to display"
+  [request report-id]
+  (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
+        access-token (first (first authentications))
+        data-response (get-salesforce-report-data report-id access-token)]
+    ))
 
+
+;; Data for the pages
 (defn get-salesforce-reports-list
   "Call for authenticated salesforce user's reports"
   [access-token]
@@ -33,13 +45,6 @@
         reports (json/parse-string (:body response) true)]
     reports))
 
-(defn get-salesforce-report
-  "Return a report for a js library to display"
-  [request report-id]
-  (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
-        access-token (first (first authentications))
-        data-response (get-salesforce-report-data report-id access-token)]
-  ))
 
 (defn get-salesforce-report-data
   "Get the data from a single report"
@@ -49,9 +54,10 @@
         report-data (json/parse-string (:body response) true)]
     report-data))
 
+;; Routes
 (defroutes salesforce-routes
   (GET "/list-reports" request
     (friend/authenticated (reports-page request)))
-  (GET "/report-data/:id" [request id]
-    (friend/authenticated (get-salesforce-report request id)))
+  (GET "/report-data/:id" [id request]
+    (friend/authenticated (salesforce-report-page request id)))
   )
