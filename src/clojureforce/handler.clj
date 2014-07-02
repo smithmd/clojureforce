@@ -89,7 +89,7 @@
                              {:client-config client-config
                               :uri-config uri-config
                               :config-auth config-auth
-                              :access-token-parsefn get-access-token-from-params})]
+                              :access-token-parsefn extract-access-token})]
                })
             app-routes
             ]
