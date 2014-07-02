@@ -32,4 +32,4 @@
   (GET "/list-reports" request
     (friend/authorize #{::user} (reports-page request)))
   (GET "/role-user" req
-    (friend/authorize #{::user} "You're a user!")))
+    (friend/authorize "You're a user!")))
