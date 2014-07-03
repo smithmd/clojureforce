@@ -38,10 +38,10 @@
                             (str "https://na3.salesforce.com/services/data/v30.0/analytics/reports/" report-id "/instances/" instance-id "?includeDetails=true"))))
   (GET "/reports/:id/instances" [id :as request]
     (friend/authenticated (salesforce-route-authentication request
-                            (str"https://na3.salesforce.com/services/data/v30.0/analytics/reports/" id "/instances?includeDetails=true"))))
+                            (str"https://na3.salesforce.com/services/data/v30.0/analytics/reports/" id "/instances"))))
   (GET "/reports/:id" [id :as request]
     (friend/authenticated (salesforce-route-authentication request
-                            (str "https://na3.salesforce.com/services/data/v30.0/analytics/reports/" id))))
+                            (str "https://na3.salesforce.com/services/data/v30.0/analytics/reports/" id "?includeDetails=true"))))
   (GET "/reports" request
     (friend/authenticated (salesforce-route-authentication request
                             "https://na3.salesforce.com/services/data/v30.0/analytics/reports")))
