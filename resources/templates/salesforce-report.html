@@ -10,7 +10,8 @@
 {% block scripts %}
 <script type="text/javascript">
 	$(document).ready( function () {
-		alert('test');
+		var jsonObjects = $.parseJSON( $.get('/reports'));
+		alert('json: ' + jsonObjects.length);
 	});
 </script>
 {% endblock %}
