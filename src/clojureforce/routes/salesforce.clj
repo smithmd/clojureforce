@@ -61,18 +61,21 @@
 ;; Routes
 (defroutes salesforce-routes
   (GET "/reports/:report-id/instances/:instance-id" [report-id instance-id :as request]
-    (friend/authenticated (salesforce-route-authentication request
+    (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" report-id "/instances/" instance-id "?includeDetails=true"))))
+  (GET "/reports/:id/instances/new-async" [id :as request]
+    (friend/authenticated (salesforce-post request
+                            (str sf-base-url sf-api-path "/analytics/reports/" id "/instances"))))
   (GET "/reports/:id/instances" [id :as request]
-    (friend/authenticated (salesforce-route-authentication request
+    (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "/instances"))))
   (GET "/reports/:id/describe" [id :as request]
-    (friend/authenticated (salesforce-route-authentication request
+    (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "/describe"))))
   (GET "/reports/:id" [id :as request]
-    (friend/authenticated (salesforce-route-authentication request
+    (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "?includeDetails=true"))))
   (GET "/reports" request
-    (friend/authenticated (salesforce-route-authentication request
+    (friend/authenticated (salesforce-get request
                             sf-base-url sf-api-path "/analytics/reports")))
   )
