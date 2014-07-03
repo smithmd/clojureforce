@@ -23,7 +23,7 @@
 
 ;; Authentication
 (defn salesforce-route-authentication
-  "Return a report for a js library to display"
+  "Return an access token for the salesforce api"
   [request]
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
         access-token (first (first authentications))]
@@ -31,12 +31,14 @@
 
 ;; Page routes
 (defn salesforce-get
+  "Generic route for a GET request"
   [request url]
   (let [access-token (salesforce-route-authentication request)
         data-response (get-salesforce-api-data url access-token)]
     data-response))
 
 (defn salesforce-post
+  "Generic route for a POST request"
   [request url]
   (let [access-token (salesforce-route-authentication request)
         data-response (post-salesforce-api-data url access-token)]
@@ -60,12 +62,12 @@
 
 ;; Routes
 (defroutes salesforce-routes
-  (GET "/reports/:report-id/instances/:instance-id" [report-id instance-id :as request]
-    (friend/authenticated (salesforce-get request
-                            (str sf-base-url sf-api-path "/analytics/reports/" report-id "/instances/" instance-id "?includeDetails=true"))))
   (GET "/reports/:id/instances/new-async" [id :as request]
     (friend/authenticated (salesforce-post request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "/instances"))))
+  (GET "/reports/:report-id/instances/:instance-id" [report-id instance-id :as request]
+    (friend/authenticated (salesforce-get request
+                            (str sf-base-url sf-api-path "/analytics/reports/" report-id "/instances/" instance-id "?includeDetails=true"))))
   (GET "/reports/:id/instances" [id :as request]
     (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "/instances"))))
