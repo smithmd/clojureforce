@@ -19,7 +19,7 @@
 				var jsonArray = $.parseJSON(data);
 				var output = '';
 				$.each(jsonArray, function (index, obj) {
-					output += obj.id + " : " + obj.name;
+					output += obj.id + " : " + obj.name + "<br />";
 				});
 				return output;
 			});
