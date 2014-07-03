@@ -2,7 +2,7 @@ var generateReportListLink = function() {
    return '<a href="void(0);" onclick="getReportList();">Return to full report list</a>';
 };
 
-var generateReportLink = function(Object report) {
+var generateReportLink = function(report) {
     return '<a href="void(0);" onclick="loadReport(' + report.id + ');">' + report.name + '</a>'
 };
 
