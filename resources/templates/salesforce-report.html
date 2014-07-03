@@ -1,0 +1,18 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<div class="row-fluid">
+	<div class="span8" id="reportList">
+
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready( function () {
+		var json = '{{json|safe}}';
+		var output = '';
+		$.each(json, function (this) {
+			output += this.id + '<br />';
+		};
+		$('#reportList').html(output);
+	});
+</script>
+{% endblock %}
