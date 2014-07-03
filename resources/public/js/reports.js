@@ -1,9 +1,9 @@
 var generateReportListLink = function() {
-   return '<a href="void(0);" onclick="getReportList();">Return to full report list</a>';
+   return '<a href="javascript:void(0);" onclick="getReportList();">Return to full report list</a>';
 };
 
 var generateReportLink = function(report) {
-    return '<a href="void(0);" onclick="loadReport(' + report.id + ');">' + report.name + '</a>'
+    return '<a href="javascript:void(0);" onclick="loadReport(' + report.id + ');">' + report.name + '</a>'
 };
 
 $(document).ready( function () {
