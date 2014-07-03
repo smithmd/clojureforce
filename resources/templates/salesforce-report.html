@@ -1,29 +1,11 @@
 {% extends "templates/base.html" %}
 {% block content %}
 <div class="row-fluid">
-	<div class="span8" id="reportList">
-
+	<div class="span8" id="getResult">
 	</div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
-	$(document).ready( function () {
-		getReportList();
-	});
-
-	function getReportList() {
-		$.get('/reports', function (data) {
-			$('#reportList').html( function () {
-				var jsonArray = $.parseJSON(data);
-				var output = '';
-				$.each(jsonArray, function (index, obj) {
-					output += obj.id + " : " + obj.name + "<br />";
-				});
-				return output;
-			});
-		});
-	}
-</script>
+<script type="application/javascript" src="/js/reports.js"></script>
 {% endblock %}
