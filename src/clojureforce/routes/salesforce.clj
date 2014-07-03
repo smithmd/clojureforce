@@ -11,7 +11,7 @@
 
 ;; Authentication
 (declare salesforce-route-authentication)
-;; Pages
+;; Salesforce Routes
 (declare salesforce-get)
 (declare salesforce-post)
 ;; Data Functions
@@ -29,7 +29,7 @@
         access-token (first (first authentications))]
     access-token))
 
-;; Page routes
+;; Salesforce routes
 (defn salesforce-get
   "Generic route for a GET request"
   [request url]
@@ -41,7 +41,7 @@
   "Generic route for a POST request"
   [request url]
   (let [access-token (salesforce-route-authentication request)
-        data-response (post-salesforce-api-data url access-token)]
+        data-response (post-salesforce-api-data url access-token request)]
     data-response))
 
 ;; Data for the pages
@@ -54,15 +54,16 @@
 
 (defn post-salesforce-api-data
   "POST data to the Salesforce API"
-  [url access-token]
-  (let [response (client/post url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
+  [url access-token request]
+  (let [response (client/post url {:accept :json :headers {"Authorization" (str "Bearer " access-token) :body (get-in request [:body]) :content-type :json}})
         data (json/parse-string (:body response) true)]
     data))
 
 
+
 ;; Routes
 (defroutes salesforce-routes
-  (GET "/reports/:id/instances/new-async" [id :as request]
+  (POST "/reports/:id/instances/new-async" [id :as request]
     (friend/authenticated (salesforce-post request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "/instances"))))
   (GET "/reports/:report-id/instances/:instance-id" [report-id instance-id :as request]
@@ -78,6 +79,6 @@
     (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "?includeDetails=true"))))
   (GET "/reports" request
-    (friend/authenticated (salesforce-get request
-                            sf-base-url sf-api-path "/analytics/reports")))
+    (layout/render "home.html" {:content (friend/authenticated (salesforce-get request
+                            sf-base-url sf-api-path "/analytics/reports"))}))
   )
