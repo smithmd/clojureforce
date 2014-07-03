@@ -49,14 +49,14 @@
   "GET data from the Salesforce API"
   [url access-token]
   (let [response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
-        data (json/parse-string (:body response) true)]
+        data (:body response)]
     data))
 
 (defn post-salesforce-api-data
   "POST data to the Salesforce API"
   [url access-token request]
   (let [response (client/post url {:accept :json :headers {"Authorization" (str "Bearer " access-token) :body (get-in request [:body]) :content-type :json}})
-        data (json/parse-string (:body response) true)]
+        data (:body response)]
     data))
 
 
@@ -79,6 +79,6 @@
     (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "?includeDetails=true"))))
   (GET "/reports" request
-    (friend/authenticated (layout/render "home.html" {:content (apply str (salesforce-get request
-                                                                 (str sf-base-url sf-api-path "/analytics/reports")))})))
+    (friend/authenticated (layout/render "home.html" {:content (salesforce-get request
+                                                                 (str sf-base-url sf-api-path "/analytics/reports"))})))
   )
