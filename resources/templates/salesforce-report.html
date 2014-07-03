@@ -10,8 +10,20 @@
 {% block scripts %}
 <script type="text/javascript">
 	$(document).ready( function () {
-		var jsonObjects = $.parseJSON( $.get('/reports'));
-		alert('json: ' + jsonObjects.length);
+		getReportList();
 	});
+
+	function getReportList() {
+		$.get('/reports', function (data) {
+			$('#reportList').html( function (data) {
+				var jsonObjects = $.parseJSON(data);
+					var output = '';
+					$.each(jsonObjects, function (this) {
+						output += this.id + "<br />";
+					});
+					return output;
+			});
+		});
+	}
 </script>
 {% endblock %}
