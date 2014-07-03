@@ -18,7 +18,7 @@
 			$('#reportList').html( function (data) {
 				var jsonObjects = $.parseJSON(data);
 					var output = '';
-					$.each(jsonObjects, function (this) {
+					$.each(jsonObjects, function () {
 						output += this.id + "<br />";
 					});
 					return output;
