@@ -80,6 +80,6 @@
                             (str sf-base-url sf-api-path "/analytics/reports/" id "?includeDetails=true"))))
   (GET "/reports" request
     (friend/authenticated (layout/render "salesforce-report.html"
-                            {:content (salesforce-get request
+                            {:json (salesforce-get request
                                         (str sf-base-url sf-api-path "/analytics/reports"))})))
   )
