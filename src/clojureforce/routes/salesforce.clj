@@ -79,6 +79,6 @@
     (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "?includeDetails=true"))))
   (GET "/reports" request
-    (friend/authenticated (salesforce-get request
-                                                                 (str sf-base-url sf-api-path "/analytics/reports"))))
+    (friend/authenticated (layout/render "home.html" {:content  (salesforce-get request
+                                                                 (str sf-base-url sf-api-path "/analytics/reports"))})))
   )
