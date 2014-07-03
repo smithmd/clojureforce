@@ -15,13 +15,8 @@
 
 	function getReportList() {
 		$.get('/reports', function (data) {
-			$('#reportList').html( function (data) {
-				var jsonObjects = $.parseJSON(data);
-					var output = '';
-					$.each(jsonObjects, function () {
-						output += this.id + "<br />";
-					});
-					return output;
+			$('#reportList').html( function () {
+				return data;
 			});
 		});
 	}
