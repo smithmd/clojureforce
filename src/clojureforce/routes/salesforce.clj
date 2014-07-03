@@ -8,30 +8,55 @@
             (cemerick.friend [workflows :as workflows]
               [credentials :as creds])
             [friend-oauth2.workflow :as oauth2]))
-;; pages
+
+;; Authentication
 (declare salesforce-route-authentication)
-;; data functions
+;; Pages
+(declare salesforce-get)
+(declare salesforce-post)
+;; Data Functions
 (declare get-salesforce-api-data)
+(declare post-salesforce-api-data)
 
 (def sf-base-url "https://na3.salesforce.com")
 (def sf-api-path "/services/data/v30.0")
 
-;; Page routes
+;; Authentication
 (defn salesforce-route-authentication
   "Return a report for a js library to display"
-  [request url]
+  [request]
   (let [authentications (get-in request [:session :cemerick.friend/identity :authentications])
-        access-token (first (first authentications))
+        access-token (first (first authentications))]
+    access-token))
+
+;; Page routes
+(defn salesforce-get
+  [request url]
+  (let [access-token (salesforce-route-authentication request)
         data-response (get-salesforce-api-data url access-token)]
+    data-response))
+
+(defn salesforce-post
+  [request url]
+  (let [access-token (salesforce-route-authentication request)
+        data-response (pose-salesforce-api-data url access-token)]
     data-response))
 
 ;; Data for the pages
 (defn get-salesforce-api-data
-  "Get data from the Salesforce API"
+  "GET data from the Salesforce API"
   [url access-token]
   (let [response (client/get url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
         data (json/parse-string (:body response) true)]
     data))
+
+(defn post-salesforce-api-data
+  "POST data to the Salesforce API"
+  [url access-token]
+  (let [response (client/post url {:accept :json :headers {"Authorization" (str "Bearer " access-token)}})
+        data (json/parse-string (:body response) true)]
+    data))
+
 
 ;; Routes
 (defroutes salesforce-routes
