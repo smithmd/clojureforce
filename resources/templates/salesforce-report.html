@@ -7,7 +7,7 @@
 </div>
 <script type="text/javascript">
 	$(document).ready( function () {
-		var json = '{{json|safe}}';
+		var json = $.parseJSON('{{json|safe}}');
 		var output = '';
 		$.each(json, function (this) {
 			output += this.id + '<br />';
