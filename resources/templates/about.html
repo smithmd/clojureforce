@@ -1,4 +1,8 @@
 {% extends "templates/base.html" %}
 {% block content %}
-  <p>this is the story of clojureforce... work in progress</p>
+<div class="row-fluid">
+	<div class="span8">
+		{{content|safe}}
+	</div>
+</div>
 {% endblock %}

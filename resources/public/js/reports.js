@@ -33,3 +33,7 @@ function loadReport(reportId) {
         });
     });
 }
+
+function formatReport(jsonData) {
+
+}

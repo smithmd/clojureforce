@@ -8,7 +8,7 @@
     "home.html" {:content (util/md->html "/md/docs.md")}))
 
 (defn about-page []
-  (layout/render "about.html"))
+  (layout/render "about.html" {:content (util/md-html "/md/about.md")}))
 
 (defn status-page [request]
   (let [count (:count (:session request) 0)
