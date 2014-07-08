@@ -42,7 +42,7 @@ function formatReport(jsonData) {
         .data(dataset)
         .enter()
         .append("p")
-        .text( function(d) { return d.aggregates[0].label; });
+        .text( function(d) { return d.aggregates[0].value; });
 }
 
 function prepData(jsonData) {
