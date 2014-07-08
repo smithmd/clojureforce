@@ -68,7 +68,7 @@
                             (str sf-base-url sf-api-path "/analytics/reports/" id "/instances"))))
   (GET "/reports/:report-id/instances/:instance-id" [report-id instance-id :as request]
     (friend/authenticated (salesforce-get request
-                            (str sf-base-url sf-api-path "/analytics/reports/" report-id "/instances/" instance-id "?includeDetails=true"))))
+                            (str sf-base-url sf-api-path "/analytics/reports/" report-id "/instances/" instance-id))))
   (GET "/reports/:id/instances" [id :as request]
     (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports/" id "/instances"))))
@@ -77,7 +77,7 @@
                             (str sf-base-url sf-api-path "/analytics/reports/" id "/describe"))))
   (GET "/reports/:id" [id :as request]
     (friend/authenticated (salesforce-get request
-                            (str sf-base-url sf-api-path "/analytics/reports/" id "?includeDetails=true"))))
+                            (str sf-base-url sf-api-path "/analytics/reports/" id))))
   (GET "/reports" request
     (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports"))))

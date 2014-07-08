@@ -37,7 +37,7 @@ function loadReport(reportId) {
 function formatReport(jsonData) {
 
 
-    var JSONData = [
+    var data = [
       { "id": 3, "created_at": "Sun May 05 2013", "amount": 12000},
       { "id": 1, "created_at": "Mon May 13 2013", "amount": 2000},
       { "id": 2, "created_at": "Thu Jun 06 2013", "amount": 17000},
@@ -46,7 +46,7 @@ function formatReport(jsonData) {
     ];
 
     (function() {
-      var data = JSONData.slice()
+      var data = jsonData.slice()
       var format = d3.time.format("%a %b %d %Y")
       var amountFn = function(d) { return d.amount }
       var dateFn = function(d) { return format.parse(d.created_at) }
@@ -59,7 +59,7 @@ function formatReport(jsonData) {
         .range([180, 10])
         .domain(d3.extent(data, amountFn))
 
-      var svg = d3.select("#getResult").append("svg:svg")
+      var svg = d3.select("#chart").append("svg:svg")
       .attr("width", 300)
       .attr("height", 200)
 
@@ -70,3 +70,6 @@ function formatReport(jsonData) {
        .attr("cy", function(d) { return y(amountFn(d)) })
     })();
 }
+
+
+var temporaryData = '';
