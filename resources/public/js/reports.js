@@ -43,7 +43,7 @@ function formatReport(jsonData) {
             var arr = [];
             for(var key in d.factMap) {
                 if (d.factMap.hasOwnProperty(key)) {
-                    arr.push(key);
+                    arr.push(key.value);
                 }
             }
             return arr;
@@ -52,7 +52,12 @@ function formatReport(jsonData) {
 
       d3.select("body").selectAll("p").data(prepData(data)).enter()
         .append("p")
-        .text(function(d) {return d.aggregates[0].value;});
+        .text(
+            function(d) {
+                var a = d.aggregates;
+                return a[0].value;
+            }
+        );
 
     })();
 }
