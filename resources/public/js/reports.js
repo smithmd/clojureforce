@@ -49,26 +49,8 @@ function formatReport(jsonData) {
             return arr;
         };
 
-      var format = d3.time.format("%a %b %d %Y");
-      var amountFn = function(d) { return d.amount };
-      var dateFn = function(d) { return format.parse(d.created_at) };
 
-      var valFn = function(d) { return d.aggregates[0].value };
-
-      var x = d3.time.scale()
-        .range([10, 280])
-        .domain(d3.extent(data, dateFn));
-
-      var y = d3.scale.linear()
-        .range([180, 10])
-        .domain(d3.extent(data, valFn));
-
-      var svg = d3.select("#chart").append("svg:svg")
-      .attr("width", 300)
-      .attr("height", 200);
-
-
-      svg.select("body").selectAll("p").data(prepData(data)).enter()
+      d3.select("body").selectAll("p").data(prepData(data)).enter()
         .append("p")
         .text(function(d) {return d.aggregates[0].value;});
 
