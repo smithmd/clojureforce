@@ -42,14 +42,14 @@ function formatReport(jsonData) {
         .data(dataset)
         .enter()
         .append("p")
-        .text( function(d) { return d.aggregates[0].value; });
+        .text( function(d) { return d.aggregates[0].label; });
 }
 
 function prepData(jsonData) {
     var jsonArray = [];
-    for (var key in jsonData) {
-        if (jsonData.hasOwnProperty(key)) {
-            jsonArray.push(jsonData[key]);
+    for (var key in jsonData.factMap) {
+        if (jsonData.factMap.hasOwnProperty(key)) {
+            jsonArray.push(jsonData.factMap[key]);
         }
     }
 
