@@ -36,13 +36,24 @@ function loadReport(reportId) {
 
 function formatReport(jsonData) {
 
-    var dataset = [ 5, 10, 15, 20, 25 ];
+    var dataset = prepData(temporaryData);
 
     d3.select("body").selectAll("p")
         .data(dataset)
         .enter()
-        .append("p")
-        .text( function(d) { return d; });
+        .append("#chart")
+        .text( function(d) { return d.aggregates[0].value; });
+}
+
+function prepData(jsonData) {
+    var jsonArray = [];
+    for (var key in jsonData) {
+        if (jsonData.hasOwnProperty(key)) {
+            jsonArray.push(jsonData[key]);
+        }
+    }
+
+    return jsonArray;
 }
 
 var temporaryData = {
