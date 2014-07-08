@@ -38,10 +38,10 @@ function formatReport(jsonData) {
 
     var dataset = prepData(temporaryData);
 
-    d3.select("body").selectAll("p")
+    d3.select("#chart").selectAll("p")
         .data(dataset)
         .enter()
-        .append("#chart")
+        .append("p")
         .text( function(d) { return d.aggregates[0].value; });
 }
 
