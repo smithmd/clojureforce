@@ -27,10 +27,9 @@ function loadReport(reportId) {
     $.get('/reports/' + reportId, function (data) {
         $('#getResult').html( function () {
             var output = "<p>" + generateReportListLink() + "</p>";
-            output += data;
-
             return output;
         });
+        formatReport(reportId);
     });
 }
 
