@@ -20,6 +20,7 @@ function getReportList() {
             });
             return output;
         });
+        $('#chart').html('');
     });
 }
 
