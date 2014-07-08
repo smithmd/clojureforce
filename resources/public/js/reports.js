@@ -20,8 +20,8 @@ function getReportList() {
             });
             return output;
         });
-        $('#chart').html('');
     });
+    $('#chart').html('');
 }
 
 function loadReport(reportId) {
@@ -30,13 +30,13 @@ function loadReport(reportId) {
             var output = "<p>" + generateReportListLink() + "</p>";
             return output;
         });
-        formatReport(reportId);
+        formatReport(data);
     });
 }
 
 function formatReport(jsonData) {
 
-    var dataset = prepData(temporaryData);
+    var dataset = prepData(jsonData);
 
     d3.select("#chart").selectAll("p")
         .data(dataset)
