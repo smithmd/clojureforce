@@ -36,30 +36,13 @@ function loadReport(reportId) {
 
 function formatReport(jsonData) {
 
-    var data = temporaryData;
+    var dataset = [ 5, 10, 15, 20, 25 ];
 
-    (function() {
-        var prepData = function(d) {
-            var arr = [];
-            for(var key in d.factMap) {
-                if (d.factMap.hasOwnProperty(key)) {
-                    arr.push(key.value);
-                }
-            }
-            return arr;
-        };
-
-
-      d3.select("body").selectAll("p").data(prepData(data)).enter()
+    d3.select("body").selectAll("p")
+        .data(dataset)
+        .enter()
         .append("p")
-        .text(
-            function(d) {
-                var a = d.aggregates;
-                return a[0].value;
-            }
-        );
-
-    })();
+        .text( function(d) { return d; });
 }
 
 var temporaryData = {
