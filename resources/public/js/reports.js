@@ -30,7 +30,7 @@ function loadReport(reportId) {
             var output = "<p>" + generateReportListLink() + "</p>";
             return output;
         });
-        formatReport(data);
+        formatReport($.parseJSON(data));
     });
 }
 
