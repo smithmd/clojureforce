@@ -61,17 +61,17 @@ function formatReport(jsonData) {
 
       var y = d3.scale.linear()
         .range([180, 10])
-        .domain(d3.extent(data, amountFn));
+        .domain(d3.extent(data, valFn));
 
       var svg = d3.select("#chart").append("svg:svg")
       .attr("width", 300)
       .attr("height", 200);
 
 
-      svg.selectAll("circle").data(prepData(data)).enter()
-       .append("svg:circle")
-       .attr("r", 4)
-       .attr("cy", function(d) { return y(amountFn(d)) });
+      svg.select("body").selectAll("p").data(prepData(data)).enter()
+        .append("p")
+        .text(function(d) {return d.aggregates[0].value;});
+
     })();
 }
 
