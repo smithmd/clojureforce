@@ -43,7 +43,7 @@ function formatReport(jsonData) {
         .data(dataset)
         .enter()
         .append("div")
-        .classed("bar", true)
+        .attr("class", "bar")
         .style("height", function(d) {
             return (d % 50) + "px";
         });
