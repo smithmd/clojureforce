@@ -44,7 +44,7 @@ function formatReport(jsonData) {
         .append("div")
         .attr("class", "bar")
         .style("height", function(d) {
-            var heightMod = (d.aggregates[0].value % 50) + 1;
+            var heightMod = (d.aggregates[0].value / 1000) + 1;
             return heightMod + "px";
         });
 }
