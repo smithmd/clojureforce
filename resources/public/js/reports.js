@@ -37,7 +37,6 @@ function loadReport(reportId) {
 function formatReport(jsonData) {
 
     var dataset = prepData(jsonData);
-    var headers = getHeaders(jsonData);
 
     d3.select("#chart").selectAll("div")
         .data(dataset)
@@ -45,7 +44,7 @@ function formatReport(jsonData) {
         .append("div")
         .attr("class", "bar")
         .style("height", function(d) {
-            var heightMod = (d % 50) + 1;
+            var heightMod = (d.aggregates[0].value % 50) + 1;
             return heightMod + "px";
         });
 }
@@ -59,8 +58,4 @@ function prepData(jsonData) {
     }
 
     return jsonArray;
-}
-
-function getHeaders(jsonData) {
-
 }
