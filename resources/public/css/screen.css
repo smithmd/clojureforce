@@ -4,3 +4,10 @@ body {
     height: 100%;
     padding-top: 40px;
 }
+
+.bar {
+    display: inline-block;
+    width: 20px;
+    height: 75px;   /* We'll override height later */
+    background-color: teal;
+}
