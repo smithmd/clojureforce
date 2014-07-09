@@ -43,7 +43,10 @@ function formatReport(jsonData) {
         .data(dataset)
         .enter()
         .append("div")
-        .classed("bar", true);
+        .classed("bar", true)
+        .style("height", function(d) {
+            return (d % 50) + "px";
+        });
 }
 
 function prepData(jsonData) {
