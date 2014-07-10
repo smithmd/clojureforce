@@ -59,7 +59,7 @@ function formatReport(jsonData) {
             })
             .attr("fill", "yellow")
             .attr("stroke", "orange")
-            .attr("stroke-width" function(d) {
+            .attr("stroke-width", function(d) {
                 return Math.floor(d.aggregates[0].value / 5000) + 1;
             });
 }
