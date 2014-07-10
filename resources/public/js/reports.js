@@ -53,7 +53,7 @@ function formatReport(jsonData) {
 
     circles.attr({
         cx: function (d) {
-            return Math.floor(d.aggregates[0].value / 1000) + 25;
+            return Math.floor(d.aggregates[0].value / 100) + 25;
         },
         cy: function (d) {
             return d.aggregates[1].value;
