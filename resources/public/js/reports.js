@@ -59,10 +59,10 @@ function formatReport(jsonData) {
          })
          .attr("width", (w / data_set.length) - barPadding)
          .attr("height", function(d) {
-            return Math.ceil(d.aggregates[0].value / 1000) + 1;
+            return Math.ceil(d.aggregates[0].value / 1000) + 25;
          })
          .attr("fill",function(d) {
-            return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 1500) % 256 + ")";
+            return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) + 25) + ")";
          })
          .attr("stroke", "orange")
          .attr("stroke-width", 2);
