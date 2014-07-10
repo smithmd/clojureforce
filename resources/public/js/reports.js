@@ -53,10 +53,10 @@ function formatReport(jsonData) {
 
     rects.attr({
         x: function(d,i) {
-            return i * (w / data_set.length) + 2;
+            return i * (w / data_set.length);
         },
         y: function(d) {
-            return h - Math.ceil(d.aggregates[0].value / 1000) - 2;
+            return h - Math.ceil(d.aggregates[0].value / 1000);
         },
         width: (w / data_set.length) - barPadding,
         height: function(d) {
@@ -64,9 +64,7 @@ function formatReport(jsonData) {
         },
         fill: function(d) {
                 return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
-        },
-        stroke: "black",
-        "stroke-width" : 2
+        }
     });
 
     var texts = svg.selectAll("text")
@@ -82,7 +80,7 @@ function formatReport(jsonData) {
                 return i * (w / data_set.length) + (w / data_set.length - barPadding) / 2;
             },
             y: function(d) {
-                return h - Math.ceil(d.aggregates[0].value / 1000) - 2 + 15;
+                return h - Math.ceil(d.aggregates[0].value / 1000) - 2 + 14;
             },
             "font-family": "sans-serif",
             "font-size": "11px",
