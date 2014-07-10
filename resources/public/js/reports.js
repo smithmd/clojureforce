@@ -62,7 +62,7 @@ function formatReport(jsonData) {
             return Math.ceil(d.aggregates[0].value / 1000) + 1;
          })
          .attr("fill",function(d) {
-            return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000)) * 15 + ")";
+            return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 1500) % 256 + ")";
          })
          .attr("stroke", "orange")
          .attr("stroke-width", 2);
