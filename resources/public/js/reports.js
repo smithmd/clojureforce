@@ -66,7 +66,7 @@ function formatReport(jsonData) {
                          return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
                       },
         stroke: "orange",
-        stroke-width: 2
+        "stroke-width" : 2
     });
 
 }
