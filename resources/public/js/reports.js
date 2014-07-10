@@ -55,7 +55,7 @@ function formatReport(jsonData) {
             })
             .attr("cy", h/2)
             .attr("r", function(d) {
-                return Math.ceil(d.aggregates[0].value / 1000) + 5);
+                return Math.ceil(d.aggregates[0].value / 1000) + 5;
             });
 }
 
