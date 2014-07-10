@@ -51,21 +51,23 @@ function formatReport(jsonData) {
                    .enter()
                    .append("rect");
 
-    rects.attr("x", function(d,i) {
-            return i * (w / data_set.length) + 2;
-         })
-         .attr("y", function(d) {
-            return h - Math.ceil(d.aggregates[0].value / 1000) - 2;
-         })
-         .attr("width", (w / data_set.length) - barPadding)
-         .attr("height", function(d) {
-            return Math.ceil(d.aggregates[0].value / 1000) + 25;
-         })
-         .attr("fill",function(d) {
-            return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
-         })
-         .attr("stroke", "orange")
-         .attr("stroke-width", 2);
+    rects.attr({
+        x: function(d,i) {
+                       return i * (w / data_set.length) + 2;
+                    },
+        y: function(d) {
+                       return h - Math.ceil(d.aggregates[0].value / 1000) - 2;
+                    },
+        width: (w / data_set.length) - barPadding,
+        height: function(d) {
+                            return Math.ceil(d.aggregates[0].value / 1000) + 25;
+                         },
+        fill:function(d) {
+                         return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
+                      },
+        stroke: "orange",
+        stroke-width: 2
+    });
 
 }
 
