@@ -45,23 +45,15 @@ function formatReport(jsonData) {
                 .attr("width", w)
                 .attr("height", h);
 
-    var circles = svg.selectAll("circle")
-                     .data(dataset)
-                     .enter()
-                     .append("circle");
+    var rects = svg.selectAll("rect")
+                   .data(dataset)
+                   .enter()
+                   .append("rect")
+                   .attr("x", 0)
+                   .attr("y", 0)
+                   .attr("width", 20)
+                   .attr("height", 100);
 
-    circles.attr("cx", function (d,i) {
-                return (i * 60) + 25;
-            })
-            .attr("cy", h/2)
-            .attr("r", function(d) {
-                return Math.ceil(d.aggregates[0].value / 1000) + 1;
-            })
-            .attr("fill", "yellow")
-            .attr("stroke", "orange")
-            .attr("stroke-width", function(d) {
-                return Math.floor(d.aggregates[0].value / 5000) + 1;
-            });
 }
 
 function prepData(jsonData) {
