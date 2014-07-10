@@ -56,7 +56,7 @@ function formatReport(jsonData) {
             return i * (w / data_set.length);
         },
         y: function(d) {
-            return h - Math.ceil(d.aggregates[0].value / 1000);
+            return h - Math.ceil(d.aggregates[0].value / 1000) * 4;
         },
         width: (w / data_set.length) - barPadding,
         height: function(d) {
