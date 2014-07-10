@@ -37,8 +37,9 @@ function loadReport(reportId) {
 function formatReport(jsonData) {
     var w = 750;
     var h = 100;
+    var barPadding = 1;
 
-    var dataset = prepData(jsonData);
+    var data_set = prepData(jsonData);
 
     var svg = d3.select("#chart")
                 .append("svg")
@@ -46,13 +47,21 @@ function formatReport(jsonData) {
                 .attr("height", h);
 
     var rects = svg.selectAll("rect")
-                   .data(dataset)
+                   .data(data_set)
                    .enter()
-                   .append("rect")
-                   .attr("x", 0)
-                   .attr("y", 0)
-                   .attr("width", 20)
-                   .attr("height", 100);
+                   .append("rect");
+
+    rects.attr("x", function(d,i) {
+            return i * (w / data_set.length);
+         })
+         .attr("y", 0)
+         .attr("width", (w / data_set.length) - barPadding)
+         .attr("height", function(d) {
+            return Math.ceil(d.aggregates[0].value / 1000) + 1;
+         })
+         .attr("fill", "yellow")
+         .attr("stroke", "orange")
+         .attr("stroke-width", 1);
 
 }
 
