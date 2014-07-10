@@ -53,21 +53,38 @@ function formatReport(jsonData) {
 
     rects.attr({
         x: function(d,i) {
-                       return i * (w / data_set.length) + 2;
-                    },
+            return i * (w / data_set.length) + 2;
+        },
         y: function(d) {
-                       return h - Math.ceil(d.aggregates[0].value / 1000) - 2;
-                    },
+            return h - Math.ceil(d.aggregates[0].value / 1000) - 2;
+        },
         width: (w / data_set.length) - barPadding,
         height: function(d) {
-                            return Math.ceil(d.aggregates[0].value / 1000) + 25;
-                         },
-        fill:function(d) {
-                         return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
-                      },
-        stroke: "orange",
+                    return Math.ceil(d.aggregates[0].value / 1000) + 25;
+        },
+        fill: function(d) {
+                return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
+        },
+        stroke: "black",
         "stroke-width" : 2
     });
+
+    var texts = svg.selectAll("text")
+                  .data(data_set)
+                  .enter()
+                  .append("text");
+
+    texts.text(function(d) {
+            return Math.floor(d.aggregates[0].value / 1000);
+          })
+          .attr({
+            x: function(d,i) {
+                return i * (w / data_set.length);
+            },
+            y: function(d) {
+                return h - Math.ceil(d.aggregates[0].value / 1000) - 2;
+            }
+          });
 
 }
 
