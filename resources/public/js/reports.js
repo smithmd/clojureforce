@@ -51,11 +51,16 @@ function formatReport(jsonData) {
                      .append("circle");
 
     circles.attr("cx", function (d,i) {
-                return (i * 50) + 30;
+                return (i * 60) + 25;
             })
             .attr("cy", h/2)
             .attr("r", function(d) {
                 return Math.ceil(d.aggregates[0].value / 1000) + 1;
+            })
+            .attr("fill", "yellow")
+            .attr("stroke", "orange")
+            .attr("stroke-width" function(d) {
+                return Math.floor(d.aggregates[0].value / 5000) + 1;
             });
 }
 
