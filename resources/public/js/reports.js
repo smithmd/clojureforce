@@ -54,7 +54,9 @@ function formatReport(jsonData) {
     rects.attr("x", function(d,i) {
             return i * (w / data_set.length);
          })
-         .attr("y", 0)
+         .attr("y", function(d) {
+            return h - Math.ceil(d.aggregates[0].value / 1000) + 1;
+         })
          .attr("width", (w / data_set.length) - barPadding)
          .attr("height", function(d) {
             return Math.ceil(d.aggregates[0].value / 1000) + 1;
