@@ -60,7 +60,7 @@ function formatReport(jsonData) {
         },
         width: (w / data_set.length) - barPadding,
         height: function(d) {
-                    return Math.ceil(d.aggregates[0].value / 1000) + 25;
+                    return Math.ceil(d.aggregates[0].value / 1000) * 4;
         },
         fill: function(d) {
                 return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
