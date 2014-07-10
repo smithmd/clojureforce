@@ -52,7 +52,7 @@ function formatReport(jsonData) {
                    .append("rect");
 
     rects.attr("x", function(d,i) {
-            return i * (w / data_set.length);
+            return i * (w / data_set.length) + 2;
          })
          .attr("y", function(d) {
             return h - Math.ceil(d.aggregates[0].value / 1000) - 2;
@@ -61,7 +61,7 @@ function formatReport(jsonData) {
          .attr("height", function(d) {
             return Math.ceil(d.aggregates[0].value / 1000) + 1;
          })
-         .attr("fill", "teal")
+         .attr("fill", "yellow")
          .attr("stroke", "orange")
          .attr("stroke-width", 2);
 
