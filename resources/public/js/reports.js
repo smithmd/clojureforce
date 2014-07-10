@@ -35,7 +35,7 @@ function loadReport(reportId) {
 }
 
 function formatReport(jsonData) {
-    var w = 500;
+    var w = 750;
     var h = 100;
 
     var dataset = prepData(jsonData);
@@ -51,11 +51,11 @@ function formatReport(jsonData) {
                      .append("circle");
 
     circles.attr("cx", function (d,i) {
-                return (i * 50) + 25;
+                return (i * 50) + 30;
             })
             .attr("cy", h/2)
             .attr("r", function(d) {
-                return Math.ceil(d.aggregates[0].value / 1000) + 5;
+                return Math.ceil(d.aggregates[0].value / 1000) + 1;
             });
 }
 
