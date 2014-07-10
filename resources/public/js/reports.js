@@ -84,10 +84,10 @@ function formatReport(jsonData) {
             y: function(d) {
                 return h - Math.ceil(d.aggregates[0].value / 1000) - 2 + 15;
             },
-            "font-family", "sans-serif",
-            "font-size", "11px",
+            "font-family": "sans-serif",
+            "font-size": "11px",
             fill: "white",
-            "text-anchor", "middle"
+            "text-anchor": "middle"
           });
 
 }
