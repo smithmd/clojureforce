@@ -46,48 +46,20 @@ function formatReport(jsonData) {
                 .attr("width", w)
                 .attr("height", h);
 
-    var rects = svg.selectAll("rect")
-                   .data(data_set)
-                   .enter()
-                   .append("rect");
+    var circles = svg.selectAll("circle")
+                     .data(data_set)
+                     .enter()
+                     .append("circle");
 
-    rects.attr({
-        x: function(d,i) {
-            return i * (w / data_set.length);
+    circles.attr({
+        cx: function (d) {
+            return Math.floor(d.aggregates[0].value / 1000) + 25;
         },
-        y: function(d) {
-            return h - Math.ceil(d.aggregates[0].value / 1000) * 3 - 25;
+        cy: function (d) {
+            return d.aggregates[1].value;
         },
-        width: (w / data_set.length) - barPadding,
-        height: function(d) {
-                    return Math.ceil(d.aggregates[0].value / 1000) * 3 + 25;
-        },
-        fill: function(d) {
-                return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
-        }
+        r: 5
     });
-
-    var texts = svg.selectAll("text")
-                  .data(data_set)
-                  .enter()
-                  .append("text");
-
-    texts.text(function(d) {
-            return Math.floor(d.aggregates[0].value / 1000);
-          })
-          .attr({
-            x: function(d,i) {
-                return i * (w / data_set.length) + (w / data_set.length - barPadding) / 2;
-            },
-            y: function(d) {
-                return h - (Math.ceil(d.aggregates[0].value / 1000) * 3) + 14 - 25;
-            },
-            "font-family": "sans-serif",
-            "font-size": "11px",
-            fill: "white",
-            "text-anchor": "middle"
-          });
-
 }
 
 function prepData(jsonData) {
