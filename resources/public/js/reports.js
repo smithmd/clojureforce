@@ -61,9 +61,7 @@ function formatReport(jsonData) {
          .attr("height", function(d) {
             return Math.ceil(d.aggregates[0].value / 1000) + 1;
          })
-         .attr("fill", "teal")
-         .attr("stroke", "orange")
-         .attr("stroke-width", 1);
+         .attr("fill", "teal");
 
 }
 
