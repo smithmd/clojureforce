@@ -36,7 +36,7 @@ function loadReport(reportId) {
 
 function formatReport(jsonData) {
     var w = 750;
-    var h = 100;
+    var h = 200;
     var barPadding = 3;
 
     var data_set = prepData(jsonData);
@@ -56,11 +56,11 @@ function formatReport(jsonData) {
             return i * (w / data_set.length);
         },
         y: function(d) {
-            return h - Math.ceil(d.aggregates[0].value / 1000) * 4;
+            return h - Math.ceil(d.aggregates[0].value / 1000) * 3;
         },
         width: (w / data_set.length) - barPadding,
         height: function(d) {
-                    return Math.ceil(d.aggregates[0].value / 1000) * 4;
+                    return Math.ceil(d.aggregates[0].value / 1000) * 3;
         },
         fill: function(d) {
                 return "rgb(0,0," + (Math.ceil(d.aggregates[0].value / 1000) * 5) + ")";
@@ -80,7 +80,7 @@ function formatReport(jsonData) {
                 return i * (w / data_set.length) + (w / data_set.length - barPadding) / 2;
             },
             y: function(d) {
-                return h - (Math.ceil(d.aggregates[0].value / 1000) * 4) + 14;
+                return h - (Math.ceil(d.aggregates[0].value / 1000) * 3) + 14;
             },
             "font-family": "sans-serif",
             "font-size": "11px",
