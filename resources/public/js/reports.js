@@ -37,7 +37,7 @@ function loadReport(reportId) {
 function formatReport(jsonData) {
     var w = 750;
     var h = 100;
-    var barPadding = 1;
+    var barPadding = 3;
 
     var data_set = prepData(jsonData);
 
