@@ -64,13 +64,13 @@
    :callback {:domain "https://rocky-river-7942.herokuapp.com" :path "/salesforce.callback"}})
 
 (def uri-config
-  {:authentication-uri {:url "https://login.salesforce.com/services/oauth2/authorize"
+  {:authentication-uri {:url (str (System/getenv "API_URL") "/services/oauth2/authorize")
                         :query {:client_id (:client-id client-config)
                                 :response_type "code"
                                 :redirect_uri (format-config-uri client-config)
                                 :scope "api"}}
 
-   :access-token-uri {:url "https://login.salesforce.com/services/oauth2/token"
+   :access-token-uri {:url (str (System/getenv "API_URL") "/services/oauth2/token")
                       :query {:client_id (:client-id client-config)
                               :client_secret (:client-secret client-config)
                               :grant_type "authorization_code"
