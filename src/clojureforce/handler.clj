@@ -60,7 +60,7 @@
 
 (def client-config
   {:client-id "3MVG9yZ.WNe6byQAR1_TFat3KKU7nn31Lpx1P76tWO77jWz8R0G7oBbVfLOpflrCaUUnyV9edH3wfyARCU9fH"
-   :client-secret "2181225243101272052"
+   :client-secret ""
    :callback {:domain "https://rocky-river-7942.herokuapp.com" :path "/salesforce.callback"}})
 
 (def uri-config
