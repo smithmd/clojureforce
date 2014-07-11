@@ -59,8 +59,8 @@
 (def config-auth {:roles #{::user}})
 
 (def client-config
-  {:client-id "3MVG9Km_cBLhsuPy_yi8OscDmCfuuWcZA3WoNZRwPOKyS8b.lz3pToBRyqwT_zh7wS8fiMeXdegiJ4AuralYz"
-   :client-secret "228431216929813644"
+  {:client-id (System/getenv "CLIENT_ID")
+   :client-secret (System/getenv "CLIENT_SECRET")
    :callback {:domain "https://rocky-river-7942.herokuapp.com" :path "/salesforce.callback"}})
 
 (def uri-config
