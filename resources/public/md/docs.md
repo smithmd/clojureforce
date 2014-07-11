@@ -1,27 +1,17 @@
+This is a work in progress / experiment. The charts here have been written against very simple data sets and
+as such are not entirely reliable for real use. Depending on the structure of your reports, they probably won't
+tell you anything useful. Hopefully they'll show data after you authenticate.
 
-### Managing Your Middleware
+### Usage
 
-Two middleware functions are provided by default in the `clojureforce.middleware` namespace.
+Clicking on a link to view a report's display for the first time will prompt you to:
 
-* `log-request` - logs all requests using the debug level
-* `template-error-page` - provides friendly formatting for Selmer errors in dev mode
+a. Log in with Salesforce if you aren't already
+b. Authorize the application to pull data and a list of your most recently viewed reports.
 
-See the `:middleware` key of the `app` definition located in the `clojureforce.handler` namespace to manage the enabled middleware.
-
-### Here are some links to get started
-
-1. [HTML templating](http://www.luminusweb.net/docs/html_templating.md)
-2. [Accessing the database](http://www.luminusweb.net/docs/database.md)
-3. [Serving static resources](http://www.luminusweb.net/docs/static_resources.md)
-4. [Setting response types](http://www.luminusweb.net/docs/responses.md)
-5. [Defining routes](http://www.luminusweb.net/docs/routes.md)
-6. [Adding middleware](http://www.luminusweb.net/docs/middleware.md)
-7. [Sessions and cookies](http://www.luminusweb.net/docs/sessions_cookies.md)
-8. [Security](http://www.luminusweb.net/docs/security.md)
-9. [Deploying the application](http://www.luminusweb.net/docs/deployment.md)
-
-
+After this, any subsequent views will (at the most) ask you to log in to salesforce, then display the page.
 
 ### Salesforce Reports
 
-1. [REPORT](/report.html)
+1. [Bar Charts](/barcharts)
+1. [Scatter Plots](/scatterplots)
