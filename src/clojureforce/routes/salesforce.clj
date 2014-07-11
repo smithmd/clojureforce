@@ -81,6 +81,8 @@
   (GET "/reports" request
     (friend/authenticated (salesforce-get request
                             (str sf-base-url sf-api-path "/analytics/reports"))))
-  (GET "/report-list" request
-    (friend/authenticated (layout/render "salesforce-report.html")))
+  (GET "/scatterplots" request
+    (friend/authenticated (layout/render "salesforce-scatter.html")))
+  (GET "/barcharts" request
+    (friend/authenticated (layout/render "salesforce-bar.html")))
   )
