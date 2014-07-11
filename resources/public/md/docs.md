@@ -6,8 +6,8 @@ tell you anything useful. Hopefully they'll show data after you authenticate.
 
 Clicking on a link to view a report's display for the first time will prompt you to:
 
-a. Log in with Salesforce if you aren't already
-b. Authorize the application to pull data and a list of your most recently viewed reports.
+1. Log in with Salesforce if you aren't already  
+1. Authorize the application to pull data and a list of your most recently viewed reports.
 
 After this, any subsequent views will (at the most) ask you to log in to salesforce, then display the page.
 
