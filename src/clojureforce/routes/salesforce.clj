@@ -18,8 +18,8 @@
 (declare get-salesforce-api-data)
 (declare post-salesforce-api-data)
 
-(def sf-base-url "https://na3.salesforce.com")
-(def sf-api-path "/services/data/v30.0")
+(def sf-base-url "https://test.salesforce.com")
+(def sf-api-path "/services/data/v31.0")
 
 ;; Authentication
 (defn salesforce-route-authentication
